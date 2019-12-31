@@ -59,4 +59,11 @@ class Solution:
             
 class Solution2:
     def sumNumbers(self, root: TreeNode) -> int:
+        #dfs
+        def dfs(root, sum):
+            dfs(root.left)
+            dfs(root.right)
+
+
+
 print(Solution().sumNumbers(root))
