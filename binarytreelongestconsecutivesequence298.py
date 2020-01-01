@@ -7,6 +7,7 @@ class TreeNode:
 
 class Solution:
     def longestConsecutive(self, root) :
+        #use recursion to calculate
         self.maxN=0
         def dfs(root,parent):
             if root==None:
