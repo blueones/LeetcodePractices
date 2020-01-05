@@ -13,17 +13,13 @@ class Solution:
         def comparetrees(s,t):
             if s==t==None:
                 return True
-            elif s and t:
-                if s.val==t.val:
-                    return comparetrees(s.left,t.left) and comparetrees(s.right,t.right)
+            elif s and t and s.val==t.val:
+                return comparetrees(s.left,t.left) and comparetrees(s.right,t.right)
             return False
 
         if s and t:
-            if s.val==t.val:
-                if comparetrees(s,t):
+            if s.val==t.val and comparetrees(s,t):
                     return True
-                else:
-                    return self.isSubtree(s.left,t) or self.isSubtree(s.right,t)
             else: 
                 return self.isSubtree(s.left,t) or self.isSubtree(s.right,t)
         elif not (s or t):
