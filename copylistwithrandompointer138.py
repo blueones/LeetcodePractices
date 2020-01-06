@@ -9,6 +9,10 @@ class Node:
 class Solution:
     def copyRandomList(self, head: 'Node') -> 'Node':
         #copy one by one, stop when for a node, the next is null
+        def buildNode(node,index):
+            copyNode=Node(node.val)
+            copyNode.next=
+
         if head==None:
             return None
         else:
