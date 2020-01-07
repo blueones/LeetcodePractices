@@ -33,3 +33,16 @@ class Solution2:
                 return True
         return False
     
+class Solution3:
+    #tiny improvement on Solution2. have fast runner take one step ahead first. 
+    def hasCycle(self, head: ListNode) -> bool:
+        try:
+            fastR=head.next
+            slowR=head
+            while fastR!=None:
+                if fastR==slowR:
+                    return True
+                fastR=fastR.next.next
+                slowR=slowR.next
+        except:    
+            return False
