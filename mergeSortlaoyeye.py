@@ -12,25 +12,25 @@ class Mergesort:
         flagR=midpoint+1
         for copyA in range(startIndex,endIndex+1,1):
             self.auxL[copyA]=self.list[copyA]
-        print("self.auxL is ",self.auxL)
-        print("start, mid and end are ", startIndex,midpoint,endIndex)
+        # print("self.auxL is ",self.auxL)
+        # print("start, mid and end are ", startIndex,midpoint,endIndex)
         for flagA in range(startIndex,endIndex+1,1):
             if flagL>midpoint:
-                print("where1")
+                # print("where1")
                 self.list[flagA]=self.auxL[flagR]
                 flagR+=1
             elif flagR>endIndex:
-                print("where2")
+                # print("where2")
                 self.list[flagA]=self.auxL[flagL]
                 flagL+=1
             elif self.auxL[flagL]>self.auxL[flagR]:
-                print("where3")
-                print("entered here","flagl and r are ", flagL,flagR)
+                # print("where3")
+                # print("entered here","flagl and r are ", flagL,flagR)
                 self.list[flagA]=self.auxL[flagR]
                 flagR+=1
             else:
-                print("where4")
-                print("entered here","flagl and r are ", flagL,flagR)
+                # print("where4")
+                # print("entered here","flagl and r are ", flagL,flagR)
                 self.list[flagA]=self.auxL[flagL]
                 flagL+=1
             #print("self.auxL is now ",self.auxL)
@@ -47,12 +47,12 @@ class Mergesort:
             midPoint=startIndex+lengthL//2
             #print("now the midpoint is",midPoint)
             self.sortL(startIndex,midPoint)
-            print("entering second half with midpoint+1 being",midPoint+1,"endindex is ",endIndex)
+            # print("entering second half with midpoint+1 being",midPoint+1,"endindex is ",endIndex)
             self.sortL(midPoint+1,endIndex)
             self.merge(startIndex,midPoint,endIndex)
         elif lengthL==1:
             #print("have we entered here?")
-            print("the one item not changed is", self.list[startIndex])
+            # print("the one item not changed is", self.list[startIndex])
             self.list[startIndex]=self.auxL[startIndex]
         print("self.list is",self.list)
         #print("self.auxL is ",self.auxL)

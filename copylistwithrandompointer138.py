@@ -8,29 +8,30 @@ class Node:
 
 class Solution:
     def copyRandomList(self, head: 'Node') -> 'Node':
-        #copy one by one, stop when for a node, the next is null
-        def copynext(head2):
-            dictO={}
-            before=None
-            returnh=before
-            head1=head2
-            num=0
-            while head1!=None:
-                headc=Node(head1.val)
-                dictO[num]=head1.random
-                num+=1
-                if head1.random in listcreated:
-                if head.next==None:
-                    before.next=headc
-                    headc.next=None
-                elif head.next!=None:
-                    before.next=headc
-                    before=headc
-                    head1=head1.next
-            for node in dictO:
+        #since for each node, there are two pointers pointing at different nodes, 
+        # we could view this issue as a graph.
+        # for each node, see if it's in the visited list, if it is
+        self.visited={}
+        def copy(head):
+            if head == None:
+                return None
+            if head in self.visited:
+                return self.visited[head] 
+            else:
+                copyN = Node(head.val)
+                self.visited[head]=copyN
+                copyN.next = copy(head.next)
+                copyN.random = copy(head.random)
+            return copyN
+        if head == None:
+            return None
+        return copy(head)
 
-            return returnh.next
-        newhead=copynext(head)
+        
+        
+
+
+            
 
 
 
