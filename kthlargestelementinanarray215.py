@@ -4,6 +4,7 @@ class Solution:
         # quicksort idea. a flag, a traverse and a partition.
         # when partition is k-1 then return that partition.
         self.nums = nums 
+        random.shuffle(self.nums)
         self.lenN = len(nums)
         self.target = k-1
         def divide(l,r):
