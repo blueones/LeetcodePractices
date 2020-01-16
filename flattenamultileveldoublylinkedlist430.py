@@ -15,7 +15,7 @@ class Solution:
         # when bump into a node with child, hold on to the next node, connect to the child, then connect the child to next.
         def flattenlist(node,prev):
             if node == None:
-                return node.prev
+                return prev
             node.prev = prev
             prev.next = node
             tempNext = node.next
@@ -29,5 +29,5 @@ class Solution:
             fakehead = Node(None, None, head, None)
             flattenlist(head,fakehead)
             fakehead.next.prev = None
-            return head
+            return fakehead.next
             
