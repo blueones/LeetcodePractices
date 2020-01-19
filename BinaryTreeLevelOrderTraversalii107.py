@@ -4,6 +4,7 @@
 #         self.val = x
 #         self.left = None
 #         self.right = None
+'''Dec 25th'''
 class Solution1:
     def levelOrderBottom(self, root):
         self.root=root
@@ -90,6 +91,53 @@ class TreeNode:
 		self.val = x
 		self.left = None
 		self.right = None
+'''Jan 19th '''
+class Solution4():
+    '''same as solution2'''
+    def levelOrderBottom(self, root):
+        if root == None:
+            return []
+        queueNodes = list()
+        nextqueueNodes = list()
+        queueNodes.append(root)
+        listonlevel = list()
+        listcurrentlevel = list()
+        while queueNodes != []:
+            #print(queueNodes[0].val)
+            currentNode = queueNodes.pop(0)
+            listcurrentlevel.append(currentNode.val)
+            if currentNode.left:
+                #print("left is ", currentNode.left.val)
+                nextqueueNodes.append(currentNode.left)
+            if currentNode.right:
+                nextqueueNodes.append(currentNode.right)
+            if queueNodes == []:
+                queueNodes = nextqueueNodes
+                nextqueueNodes = []
+                listonlevel.append(listcurrentlevel)
+                listcurrentlevel = []
+        return listonlevel[::-1]
+
+class Solution5():
+    '''same as solution3'''
+    def levelOrderBottom(self, root):
+        '''this is Andy's solution. This involves a counter: n. for everylevel, it goes through n times to include nodes left and right. '''
+        if root == None:
+            return []
+        queueLevel = list()
+        queueLevel.append(root)
+        resultList = list()
+        while queueLevel != []:
+            n = len(queueLevel)
+            resultList.insert(0,[node.val for node in queueLevel])
+            while n>0 :
+                nodeCurrent = queueLevel.pop(0)
+                queueLevel.append(nodeCurrent.left) if nodeCurrent.left else pass
+                queueLevel.append(nodeCurrent.right) if nodeCurrent.right else pass
+                n -= 1
+        return resultList
+
+
 
 SunnyTree = TreeNode(1)
 SunnyTree.left = TreeNode(5)
@@ -99,4 +147,4 @@ SunnyTree.right = TreeNode(3)
 SunnyTree.right.left = TreeNode(9)
 SunnyTree.right.right = TreeNode(2)
 SunnyTree.right.right.right = TreeNode(8)
-print(Solution3().levelOrderBottom(SunnyTree))
+print(Solution4().levelOrderBottom(SunnyTree))

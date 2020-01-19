@@ -30,4 +30,8 @@ class Solution:
             flattenlist(head,fakehead)
             fakehead.next.prev = None
             return fakehead.next
+
+
+class Solution2:
+    def flatten(self, head: 'Node') -> 'Node':
             

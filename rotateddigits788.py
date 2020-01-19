@@ -43,7 +43,7 @@ class Solution2:
             good = False
             for digit in StringN:
                 if digit in ("3","4","7"):
-                    good = False
+                    good = False # need this line because break only jumps out of one loop, good could be true thus leads to wrong answer. 
                     break
                 if digit in ("2","5","6","9"):
                     good = True
