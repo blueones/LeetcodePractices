@@ -7,11 +7,23 @@ class Solution1:
         lenT = len(together)
         while lenT > K:
             lenT = lenT - K
-            together = together[:lenT] + "-" +together[lenT:]
-            
-            print(lenT)
+            together = together[:lenT] + "-" + together[lenT:] # the looping idea is right, but it's not efficient
+            #every time you do a split of list, a new list is created. so this time efficiency is more than O(n)
         return together
 class Solution2:
     def licenseKeyFormatting(self, S: str, K: int) -> str:
-        pass
-print(Solution().licenseKeyFormatting("2-5g-3-J",2))
+        # when 
+        together = S.replace("-","").upper()
+        lenT = len(together)
+        section1 = K if lenT%K == 0 else lenT%K
+        res = together[:section1]
+        while section1 < lenT:
+            res += "-"+ together[section1:section1+K] # this one the time efficiency is 
+            #O(n) since it's calculating all content in the string once. 
+            section1 += K
+        return res
+        
+        
+
+    
+print(Solution2().licenseKeyFormatting("2-5g-3-J",2))
