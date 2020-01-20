@@ -7,7 +7,7 @@ class Node:
         self.next = next
         self.child = child
 """
-class Solution:
+class Solution1:
     def flatten(self, head: 'Node') -> 'Node':
         # recursion 
         # this is like a tree, 
@@ -34,4 +34,9 @@ class Solution:
 
 class Solution2:
     def flatten(self, head: 'Node') -> 'Node':
+        # result: put child nodes linked list to next and put next right after the end of that child node linked list. 
+        #treat child node as left and next node as right
+        # attached left and then attach right.
+        # next == None then return None'
+        
             
