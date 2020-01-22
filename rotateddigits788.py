@@ -37,6 +37,7 @@ class Solution2:
     def rotatedDigits(self, N: int) -> int:
         #as long as in the string it does not have 3,4,7 and has at least one of 2,5,6,9, 
         # then it is a good number.
+        # O(N) time complexity
         numberGood = 0
         for numberTest in range(1, N+1, 1):
             StringN = str(numberTest)
@@ -50,6 +51,9 @@ class Solution2:
             if good == True:
                 numberGood += 1
         return numberGood
+class Solution3:
+    def rotatedDigits(self,N):
+        
             
                     
 

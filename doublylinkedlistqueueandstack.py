@@ -49,7 +49,7 @@ class doublyLinkedListStack:
         self.length += 1
     def pop(self):
         if self.head == None:
-            raise Exception("the list is empty now")
+            raise ValueError("the list is empty now")
         elif self.head != None:
             returnN = self.head
             self.head = self.head.next

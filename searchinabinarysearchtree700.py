@@ -11,8 +11,8 @@ class Solution:
             return None
         else:
             if root.val > val:
-                return self.searchBST(root.left)
+                return self.searchBST(root.left,val)
             elif root.val < val:
-                return self.searchBST(root.right)
+                return self.searchBST(root.right,val)
             else:
                 return root
