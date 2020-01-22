@@ -77,7 +77,7 @@ class Solution3:
                     T = T.next
                 # connect T, H into ptr
                 T.next = ptr.next
-                if ptr.next:
+                if ptr.next: #remember when dealing with linkedlist, before making any statement about a node, always check if it's None. 
                     ptr.next.prev = T
                 ptr.next = H
                 H.prev = ptr
