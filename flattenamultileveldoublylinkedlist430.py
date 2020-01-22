@@ -64,7 +64,12 @@ class Solution3:
         :type head: Node
         :rtype: Node
         """
-        
+        '''when dealing with recursion, think from the angle of the smaller problems. 
+        think that the smaller problem is solved, how is it attached to the bigger problem
+        layer to layer, how is it attached. in this one, node 7 is the beginning of the smaller problem, 
+        think that this childnode and all its child and next are all already taken care of by the recursive function
+        to combine it to the upper level, what needs to be done. 1. the upper level need to take it as next node, and its original next node as a floating node, 
+        then find the tail of the node 7 cluster, that is the previous of its original next node's previous'''
         # recursive solution
         ptr = head
         while(ptr):
