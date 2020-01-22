@@ -89,6 +89,23 @@ class Solution3:
                 ptr.child = None
                 ptr = ptr.next
         return head
+class Solution4:
+    def flatten(self,head):
+        def dfs(head, prev):
+            if head == None:
+                return prev
+            head.prev = prev
+            nodeN
+        if head == None:
+            return None
+        else:
+            fakehead = Node(0)
+            fakehead.next = head
+            head.prev = fakehead
+            dfs(head,fakehead)
+            return head
+                
+
             
 
             
