@@ -32,6 +32,101 @@ class Solution:
                 rightsumP=self.sumP(rightN,CurrentS,sum,listNright)
             return listS+leftsumP+rightsumP
 
+class Solution2:
+    def pathSum(root,sum):
+        #recursive Jan 25th
+        if root == None:
+            return []
+        self.dictNode = {root: None}
+        self.leafs = []
+        def dfs(node, currentSum):
+            if node.left == None and node.right == None:
+                if currentSum == sum:
+                    self.leafs.append(node)
+            if node.left:
+                self.dictNode[node.left] = node
+                dfs(node.left, currentSum+node.left.val)
+            if node.right:
+                self.dictNode[node.right] = node
+                dfs(node.right,currentSum+node.right.val)
+        dfs(root, root.val)
+        resultList = []
+        if self.leafs == []:
+            return []
+        for leaf in self.leafs:
+            leafpath = []
+            while leaf != None:
+                leafpath.append(leaf.val)
+                leaf = self.dictNode[leaf]
+            resultList.append(leafpath[::-1]) #make sure to reverse the list. since it's leaf to root
+        return resultList
 
+class Solution2deduct:
+    def pathSum(root,sum):
+        #recursive Jan 25th, use deduct current node value from sum instead of adding. 
+        if root == None:
+            return []
+        self.dictNode = {root: None}
+        self.leafs = []
+        def dfs(node, currentSum):
+            if node.left == None and node.right == None:
+                if currentSum == 0:
+                    self.leafs.append(node)
+            if node.left:
+                self.dictNode[node.left] = node
+                dfs(node.left, currentSum-node.left.val)
+            if node.right:
+                self.dictNode[node.right] = node
+                dfs(node.right,currentSum-node.right.val)
+        dfs(root, sum - root.val)
+        resultList = []
+        if self.leafs == []:
+            return []
+        for leaf in self.leafs:
+            leafpath = []
+            while leaf != None:
+                leafpath.append(leaf.val)
+                leaf = self.dictNode[leaf]
+            resultList.append(leafpath[::-1]) #make sure to reverse the list. since it's leaf to root
+        return resultList
+
+
+
+
+
+
+
+class Solution3:
+    def pathSum(root,sum):
+        #iterative
+        if root == None:
+            return []
+        stackList = [(root, sum - root.val)]
+        self.leafs = []
+        self.dictNodes = {root: None}
+        self.resultpath = []
+        while stackList != []:
+            currentNode, currentSum = stackList.pop(-1)
+            if currentNode.left == None and currentNode.right == None:
+                if currentSum == 0:
+                    self.leafs.append(currentNode)
+            if currentNode.left:
+                stackList.append((currentNode.left,currentSum - currentNode.left.val))
+                self.dictNodes[currentNode.left]=currentNode
+            if currentNode.right:
+                stackList.append((currentNode.right, currentSum - currentNode.right.val))
+                self.dictNodes[currentNode.right] = currentNode
+        if self.leafs == []:
+            return []
+        for leaf in self.leafs:
+            path = []
+            while leaf != None:
+                path.append(leaf.val)
+                leaf = self.dictNodes[leaf]
+            self.resultpath.append(path[::-1])
+        return self.resultpath
+
+
+        
             
             
