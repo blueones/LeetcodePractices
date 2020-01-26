@@ -13,8 +13,21 @@ class Solution:
 print (Solution().twoSum([2, 7, 11, 15],9))
 
 
-        return resultL
-print (Solution().twoSum([2, 7, 11, 15],9))
+class Solution1:
+    def twoSum(self,nums,target):
+        # binary search method
+        lenS = len(nums)
+        if lenS <= 1:
+            return []
+        dictofvisited = {}
+        for i in range(0, lenS, 1):
+            if target-nums[i] in dictofvisited and dictofvisited[target-nums[i]]!=i:
+                return [i, dictofvisited[target-nums[i]]]
+            else:
+                dictofvisited[nums[i]]= i
+                
+        return []
+              
 
 
         
