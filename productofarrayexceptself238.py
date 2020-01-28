@@ -36,7 +36,23 @@ class Solution1:
         for j in range(0,lenS,1):
             answerL[j]=leftList[j]*rightList[j]
         return answerL
+class Solution2:
+    def productExceptSelf(self,nums):
+        #note: solve it without division
+        #using constant space. 
+        lenS = len(nums)
+        leftList , rightList = [1]* lenS,[1]* lenS
+        #instead of creating rightlist. create what needs to be in rightlist on the fly. since it's related to what that value is in the last loop.
+        for i in range(1, lenS):
+            leftList[i] = leftList[i-1]*nums[i-1]
+        #print(leftList)
+        R = 1
+        for q in range(lenS-2, -1, -1):
+            R= R*nums[q+1]
+            rightList[q] = R*leftList[q]
+        #print(rightList)
+        rightList[-1] = leftList[-1]
+        return rightList
 
 
-
-print(Solution1().productExceptSelf([1,2,3,4]))
+print(Solution2().productExceptSelf([1,2,3,4]))
