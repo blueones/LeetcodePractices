@@ -52,7 +52,25 @@ class Solution2:
                 newqueue = []
         return resultL
 
-
+class Solution3:
+    def levelOrder(self,root):
+        if root == None:
+            return []
+        queueList = [root]
+        resultL = []
+        while queueList != []:
+            numberN = len(queueList)
+            levelN = [node.val for node in queueList]
+            resultL.append(levelN)
+            while numberN > 0:
+                currentNode = queueList.pop(0)
+                if currentNode.left:
+                    queueList.append(currentNode.left)
+                if currentNode.right:
+                    queueList.append(currentNode.right)
+                numberN -= 1
+            
+        return resultL
 
 
         
