@@ -5,7 +5,7 @@
 #         self.left = None
 #         self.right = None
 
-class Solution:
+class Solution1:
     def levelOrder(self, root):
         if root==None:
             return [[]]
@@ -29,6 +29,30 @@ class Solution:
             flagList=newList
         return resultL
             
+class Solution2:
+    def levelOrder(self,root):
+        if root == None:
+            return []
+        queueList = [root]
+        newqueue = []
+        resultL = []
+        levelR = []
+        while queueList != []:
+            
+            currentNode = queueList.pop(0)
+            levelR.append(currentNode.val)
+            if currentNode.left:
+                newqueue.append(currentNode.left)
+            if currentNode.right:
+                newqueue.append(currentNode.right)
+            if queueList == []:
+                resultL.append(levelR)
+                levelR = []
+                queueList = newqueue
+                newqueue = []
+        return resultL
+
+
 
 
         
