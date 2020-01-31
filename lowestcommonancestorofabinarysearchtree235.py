@@ -44,3 +44,19 @@ class Solution2:
             return None
         iterativeDFS(root)
         return self.resultNode
+
+class Solution3:
+    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        #iterative. 
+        # find the split point where p and q won't be in the same subtree.
+        if root == None:
+            return None
+        stackList = [root]
+        while stackList != []:
+            currentNode = stackList.pop(-1)
+            if currentNode.val > p.val and currentNode.val > q.val:
+                stackList.append(currentNode.left)
+            elif currentNode.val < p.val and currentNode.val < q.val:
+                stackList.append(currentNode.right)
+            else:
+                return currentNode
