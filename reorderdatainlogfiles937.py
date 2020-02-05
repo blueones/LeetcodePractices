@@ -31,4 +31,7 @@ class Solution1:
 class Solution2:
     def reorderLogFiles(self,logs):
         #creating custom rules for ordering.
-        
+        def f(log):
+            id_, rest = log.split(" ",1)
+            return (0, rest, id_) if rest[0].isalpha() else (1,)
+        return sorted(logs, key = f)
