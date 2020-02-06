@@ -42,3 +42,15 @@ class Solution1:
         return root
         
 
+class Solution2:
+    def convertBST(self,root):
+        #iterative solution
+        #use stack
+        if root == None:
+            return None
+        stackList = [root]
+        while stackList != []:
+            currentNode = stackList.pop(-1)
+            currentNode.val += currentNode.right.val
+            stackList.append(currentNode.left)
+            stackList.append(currentNode.right)

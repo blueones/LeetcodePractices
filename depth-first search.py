@@ -46,7 +46,8 @@ class Solution:
 				
 
 
-	def stackDFS(self,root):
+	def stackDFSQ(self,root):
+		#Preorder traversal
 		stackL=list()
 		stackL.append(root)
 		
@@ -58,6 +59,37 @@ class Solution:
 				stackL.append(currentNode.left)
 			
 			print(currentNode.val)
-		
+	def stackDFSZ(self,root):
+		stackL = list()
+		while True:
+			
+			if root:
+				stackL.append(root)
+				root = root.left
 
-Solution().stackDFS(SunnyTree)
+			elif stackL != []:
+				
+				currentNode = stackL.pop(-1)
+				print(currentNode.val)
+				root = currentNode.right
+
+			else:
+				break
+			
+
+	def stackDFSH(self,root):
+		stackL1 = list()
+		stackL2 = list()
+		stackL1.append(root)
+		while stackL1 != []:
+			currentNode = stackL1.pop(-1)
+			stackL2.append(currentNode)
+			if currentNode.left:
+				stackL1.append(currentNode.left)
+			if currentNode.right:
+				stackL1.append(currentNode.right)	
+		while stackL2 != []:
+			popNode = stackL2.pop(-1)
+			print(popNode.val)	
+
+Solution().stackDFSH(SunnyTree)
