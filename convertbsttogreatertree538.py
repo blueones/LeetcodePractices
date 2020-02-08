@@ -43,14 +43,24 @@ class Solution1:
         
 
 class Solution2:
-    def convertBST(self,root):
-        #iterative solution
-        #use stack
-        if root == None:
-            return None
-        stackList = [root]
-        while stackList != []:
-            currentNode = stackList.pop(-1)
-            currentNode.val += currentNode.right.val
-            stackList.append(currentNode.left)
-            stackList.append(currentNode.right)
+    def convertBST(self, root: TreeNode) -> TreeNode:
+        #iterative method Iterative reverse inorder traversal.
+        stackList = list()
+        self.currentSum = 0
+        node = root
+        while True:
+            if node:
+                stackList.append(node)
+                node = node.right
+                #print(stackList[-1].val)
+            elif stackList != []:
+                currentNode = stackList.pop(-1)
+                #print(currentNode.val)
+                currentNode.val += self.currentSum
+                self.currentSum = currentNode.val
+                node = currentNode.left
+            else:
+                break
+            
+        return root
+        
