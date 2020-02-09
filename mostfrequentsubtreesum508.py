@@ -24,8 +24,40 @@ class Solution:
             maxFrequency = max(self.dictR[value],maxFrequency)
         resultL = []
         for value in self.dictR:
-            if self.dictR[value] = maxFrequency:
+            if self.dictR[value] == maxFrequency:
                 resultL.append(value)
+        return resultL
+class Solution2:
+    def findFrequentTreeSum(self, root: TreeNode) -> List[int]:
+        self.dictR = dict()
+        def dfs(node):
+            if node:
+                subTreeValue = node.val + dfs(node.left) +dfs(node.right)
+                if subTreeValue in self.dictR:
+                    self.dictR[subTreeValue] += 1
+                else:
+                    self.dictR[subTreeValue] = 1
+                return subTreeValue
+            elif node == None:
+                return 0
+        dfs(root)
+        maxFrequency = 0
+        resultL = []
+        # for value in self.dictR:
+        #     maxFrequency = max(self.dictR[value],maxFrequency)
+        # resultL = []
+        # for value in self.dictR:
+        #     if self.dictR[value] == maxFrequency:
+        #         resultL.append(value)
+        '''improved handling'''
+        for value in self.dictR:
+            if self.dictR[value]> maxFrequency:
+                maxFrequency = self.dictR[value]
+                resultL= [value]
+            elif self.dictR[value] == maxFrequency:
+                resultL.append(value)
+
+
         return resultL
         
 
