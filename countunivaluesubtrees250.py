@@ -27,6 +27,26 @@ class Solution:
             return currentB
         dfs(root)
         return self.answer
+class Solution2:
+    def countUnivalSubtrees(self,root):
+        #pass in parent value solution.
+        self.answer = 0
+        def dfs(node, parentVal):
+            currentN = leftN = rightN =True
+            if node:
+                if node.val != parentVal:
+                    currentN = False
+                leftN = dfs(node.left,node.val)
+                rightN = dfs(node.right, node.val)
+                if leftN and rightN:
+                    self.answer += 1
+            return currentN and leftN and rightN
+        if root == None:
+            return 0
+        dfs(root,root.val)
+        return self.answer
+
+                
 sunnyNode = TreeNode(5)
 sunnyNode.left = TreeNode(1)
 sunnyNode.right = TreeNode(5)
@@ -34,4 +54,4 @@ sunnyNode.left.left = TreeNode(5)
 sunnyNode.left.right = TreeNode(5)
 sunnyNode.right.right = TreeNode(5)
 
-print(Solution().countUnivalSubtrees(sunnyNode))
+print(Solution2().countUnivalSubtrees(sunnyNode))
