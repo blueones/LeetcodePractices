@@ -22,6 +22,10 @@ class Solution:
 class Solution1:
     def postorderTraversal(self,root):
         #iterative solution
+        #postorder traversal is going from bottom to top, then left to right
+        #preorder traversal is going from top to bottom, then left to right
+        #inorder traversal is going from left to node to right
+        
         if root == None:
             return []
         stack1 = [root]
