@@ -10,7 +10,7 @@ class Node:
 class Solution:
     def inorderSuccessor(self, node: 'Node') -> 'Node':
         #find the smallest of node's right subtree. so it's knowing the root of the subtree, and find the leftmost node(inorder traversal first)
-        #use the iterative inorder traversal of tree idea. go backwards...
+        #use the iterative inorder traversal of tree idea. go backw
         if node.right:
             node = node.right
             while node.left:
@@ -23,4 +23,21 @@ class Solution:
                 return flag
         return None
             
+class Solution1:
+    def inorderSuccessor(self, node: 'Node') -> 'Node':
+        #find the smallest of node's right subtree. so it's knowing the root of the subtree, and find the leftmost node(inorder traversal first)
+        #use the iterative inorder traversal of tree idea. go backwards
+        if node.right:
+            node = node.right
+            while node.left:
+                node = node.left
+            return node
+        flag = node 
+        # while flag:
+        #     flag = flag.parent
+        #     if flag.val > node.val:
+        #         return flag
+        while flag.parent != None and flag == flag.parent.right:
+            flag = flag.parent
         
+        return flag.parent
