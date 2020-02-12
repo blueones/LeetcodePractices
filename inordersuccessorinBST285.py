@@ -10,6 +10,7 @@ class Solution:
         #inorder traversal of the BST. 
         stackList = []
         flag = False
+        self.answer = None
         while True:
             if root:
                 stackList.append(root)

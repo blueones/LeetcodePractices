@@ -42,6 +42,8 @@ class Solution3:
         #iterative method of doing this
         if root:
             stackList = [(root,1)]
+        else:
+            return 0
         depth = 0
         while stackList != []:
             currentNode, currentLevel = stackList.pop(-1)
