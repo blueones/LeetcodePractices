@@ -48,3 +48,25 @@ class Solution1:
                 dfs(node.right,stringC)
         dfs(root,"")
         return self.listR
+class Solution2:
+    def binaryTreePaths(self,root):
+        if root == None:
+            return []
+        listR = []
+        def dfs(node,stringC, listR):
+            if node.left == None and node.right == None:
+                listR.append(stringC)
+            if node.left:
+                lenC = len(stringC)
+                stringC += "->"
+                stringC += str(node.left.val)
+                dfs(node.left,stringC,listR)
+                stringC = stringC[:lenC]
+            if node.right:
+                lenC = len(stringC)
+                stringC += "->"
+                stringC += str(node.right.val)
+                dfs(node.right,stringC,listR)
+                stringC = stringC[:lenC]
+        dfs(root,str(root.val), listR)
+        return listR
