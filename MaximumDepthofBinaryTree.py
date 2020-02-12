@@ -15,3 +15,13 @@ class Solution:
             rightN=root.right
             depth=depth+max(self.maxDepth(leftN),self.maxDepth(rightN))
             return depth
+class Solution:
+    def maxDepth(self,root):
+        if root == None:
+            return 0
+        def dfs(node, lengthP):
+            if node == None:
+                return lengthP
+            else:
+                return max(dfs(node.left, lengthP + 1),dfs(node.right, lengthP +1)) 
+        return dfs(root,0)

@@ -29,3 +29,22 @@ class Solution:
         return outputL
 
         
+class Solution1:
+    def binaryTreePaths(self, root: TreeNode) -> List[str]:
+        if root == None:
+            return []
+        self.listR = []
+        def dfs(node, stringC):
+            if stringC == "":
+                stringC += str(node.val)
+            else:
+                stringC += "->"
+                stringC += str(node.val)
+            if node.left == None and node.right == None:
+                self.listR.append(stringC)
+            if node.left:
+                dfs(node.left,stringC)
+            if node.right:
+                dfs(node.right,stringC)
+        dfs(root,"")
+        return self.listR
