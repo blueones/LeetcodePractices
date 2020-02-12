@@ -29,11 +29,13 @@ class Solution1:
                     currentN = True
                 leftB = prune(node.left)
                 rightB = prune(node.right)
-            if leftB == False:
-                node.left = None
-            if rightB == False:
-                node.right = None
+                if leftB == False:
+                    node.left = None
+                if rightB == False:
+                    node.right = None
             return currentN or leftB or rightB
+        prune(root)
+        return root
 sunnyNode = TreeNode(1)
 sunnyNode.right = TreeNode(0)
 sunnyNode.right.left = TreeNode(0)
