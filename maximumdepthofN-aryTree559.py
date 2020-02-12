@@ -37,6 +37,20 @@ class Solution2:
             return 0
         return dfs(root)
 
+class Solution3:
+    def maxDepth(self,root):
+        #iterative method of doing this
+        if root:
+            stackList = [(root,1)]
+        depth = 0
+        while stackList != []:
+            currentNode, currentLevel = stackList.pop(-1)
+            depth = max(depth,currentLevel)
+            for child in currentNode.children:
+                stackList.append((child, currentLevel+1))
+        return depth
+
+
 sunnyNode = Node(1)
 sunnyNode.children=Node(3)
 sunnyNode.children=Node(2)
