@@ -26,15 +26,16 @@ class Solution1:
         #  root (left chunk) (right chunk) preorder
         #  this solution use the location of root in inorder, to find out the length of left chunk and so the length of right chunk. 
         #  then recurse. 
+        # when recurse, used left open right close to be able to catch everyone. 
         self.preorder = preorder
         self.inorder = inorder
         def build(preB, preE, inB, inE):
-            if preB == preE:
+            if preB == preE: # this is only to screen out when input preorder is []
                 return None
             currentV = self.preorder[preB]
             node = TreeNode(currentV)
             if preB + 1 == preE:
-                return node
+                return node # because when pre + 1 == preE, we already just return node. we are done recursing.
             indexNin = self.inorder.index(currentV)
             node.left = build(preB+1, preB+ indexNin- inB+1, inB, indexNin )
             node.right = build(preB + indexNin - inB +1, preE, indexNin+1, inE)
