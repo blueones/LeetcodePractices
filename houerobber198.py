@@ -2,7 +2,7 @@ class Solution:
     def rob(self, nums):
         lenN = len(nums)
         self.robberM = [(0,0) for i in range(lenN)]
-        #self.maxR = 0
+        #self.maxR = 0 # original self.maxR. in this question could just be self.maxR = max(self.robberM[0][0],self.robberM[0][1]). to deal with test case where lenN == 1
         if lenN == 0:
             return 0
         #first item is when this item is included, the max
