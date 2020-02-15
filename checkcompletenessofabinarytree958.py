@@ -20,10 +20,12 @@ class Solution:
                 leftV = 2*v
                 listN.append(leftV)
                 dictN[currentN.left]= leftV
+                queueL.append(currentN.left)
             if currentN.right:
                 rightV = 2*v+1
                 listN.append(rightV)
                 dictN[currentN.right]= rightV
+                queueL.append(currentN.right)
         import pdb; pdb.set_trace()
         return len(listN) == listN[-1]
 sunnyNode = TreeNode(1)
