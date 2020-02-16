@@ -15,4 +15,19 @@ class Solution:
             self.robberM[i]=(includeS, notIncS)
             self.maxR = max(includeS,notIncS, self.maxR)
         return self.maxR
-Solution().rob([2,1,1,2])
+#Solution().rob([2,1,1,2])
+class Solution1:
+    def rob(self,nums):
+        #simpler solution from leetcode. 
+        currentM = 0 #currentM is for this i, if included, the robbed number
+        preM = 0 # preM is for this i, if not included, the robbed number
+        self.max = 0 # this records the max for each item.
+        for i in nums:
+            #if not count i
+            
+            currentM = i+preM
+            preM = self.max
+            self.max = max(currentM, preM)
+        return self.max
+Solution1().rob([1,2,3,1])
+            
