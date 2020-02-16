@@ -107,3 +107,72 @@ class Solution2:
         #second item is when this item is not included, and include the first item nums[0], the max
         #third item is when this item is included,, and not include the first item nums[0],
         #forth item is when this item is not included,, and not include the first item nums[0],
+
+        self.robberM[0]= (nums[0],0,0,0)
+        self.maxR = max(self.robberM[0][0],self.robberM[0][1])
+        if lenN == 1:
+            return self.maxR
+        for i in range(1, lenN, 1):
+            #for house i
+            includedFirst = nums[i] + self.robberM[i-1][1]
+            notIncludedFirst = max(self.robberM[i-1][0],self.robberM[i-1][1])
+            includedNotFirst = nums[i] + self.robberM[i-1][3]
+            notIncludedNotFirst = max(self.robberM[i-1][2],self.robberM[i-1][3])
+            self.robberM[i]= (includedFirst,notIncludedFirst,includedNotFirst,notIncludedNotFirst)
+        self.maxR = max(self.robberM[lenN-1][1],self.robberM[lenN-1][2],self.robberM[lenN-1][3])
+        return self.maxR
+        
+
+class Solution3:
+    def rob(self,nums):
+        #use simplified solution from 198, start with robbing nums[0], then start with robbing nums[1]
+        # when you are robbing nums[1], then forsure it's not robbing nums[0].
+        # so what we are really doing is covering both cases:
+        #  starting with robbing nums[0] end with (maybe)robbing the second to last house, and starting without robbing nums[0] and (maybe)robbing the last house.
+        
+        lenN = len(nums)
+        if lenN == 0:
+            return 0
+        if lenN == 1:
+            return nums[0]
+        self.nums = nums
+        def robO(start, end):
+        #simpler solution from leetcode. 
+            
+            currentM = 0 #currentM is for this i, if included, the robbed number
+            preM = 0 # preM is for this i, if not included, the robbed number
+            self.max = 0 # this records the max for each item.
+            for i in range(start, end+1,1):
+                currentM = nums[i]+preM
+                preM = self.max
+                self.max = max(currentM, preM)
+            return self.max
+        
+        return max(robO(1,lenN -1),robO(0,lenN -2))
+class Solution4:
+    def rob(self,nums):
+        #solution4 is a simplified version of solution 2. same idea but to eliminate some unnecessary space. 
+        lenN = len(nums)
+        #self.maxR = 0 # original self.maxR. in this question could just be self.maxR = max(self.robberM[0][0],self.robberM[0][1]). to deal with test case where lenN == 1
+        if lenN == 0:
+            return 0
+        #first item is when this item is included, and include first item nums[0], the max
+        #second item is when this item is not included, and include the first item nums[0], the max
+        #third item is when this item is included,, and not include the first item nums[0],
+        #forth item is when this item is not included,, and not include the first item nums[0],
+        if lenN == 1:
+            return nums[0]
+        includedFirst = nums[0]
+        notIncludedFirst = 0
+        includedNotFirst = 0
+        notIncludedNotFirst = 0
+        for i in range(1,lenN,1):
+            #for house i
+            lastIncludedFirst = includedFirst
+            includedFirst = nums[i] + notIncludedFirst
+            notIncludedFirst = max(lastIncludedFirst, notIncludedFirst)
+            lastIncludedNotFirst = includedNotFirst
+            includedNotFirst = nums[i] + notIncludedNotFirst
+            notIncludedNotFirst = max(lastIncludedNotFirst,notIncludedNotFirst)
+            
+        return max(notIncludedFirst,includedNotFirst,notIncludedNotFirst)
