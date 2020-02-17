@@ -34,6 +34,48 @@ class Solution:
 class Solution1:
     def constructMaximumBinaryTree(self,nums):
         # great solution but not intuitive
+        # use iterative solution
+        stackList = []
+        for i in nums:
+            currentNode = TreeNode(i)
+            while stackList and stackList[-1] < i:
+                last = stackList.pop(-1)
+            if stackList:
+                stackList[-1].right = currentNode
+            if last:
+                currentNode.left = last
+            stackList.append(currentNode)
+            last = None
+        return stackList[0]
+class Solution2:
+    def constructMaximumBinaryTree(self,nums):
+        #much more intuitive. to insert new item into appropriate place
+        if nums == []:
+            return None
+        def insert(root, newitem):
+            # root right now is the currently largest number. if newitem > root.val. new item becomes the new root
+            newRoot = TreeNode(newitem)
+            if newitem > root.val:
+                newRoot.left = root
+                return newRoot
+            #if newitem < root.val. then put it to the right of the smallest item that's larger than newitem.
+            pre = root
+            seeker = root.right
+            while seeker and seeker.val> newitem:
+                pre = seeker
+                seeker = seeker.right
+            pre.right = newRoot
+            newRoot.left = seeker
+            return root    
+            
+        currentNode = TreeNode(nums[0])
+        for i in range(1, len(nums),1):
+            currentNode = insert(currentNode, nums[i])
+        return currentNode
         
+                
+
+                
+
 
 Solution().constructMaximumBinaryTree([3,2,1,6,0,5])
