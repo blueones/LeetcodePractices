@@ -41,4 +41,20 @@ class Solution:
 class Solution:
     def maxAncestorDiff(self,root)
     #mark the largest and smallest bumped into. then do a final abs().
+        if root == None:
+            return 0
+        self.maxD = 0
+        def dfs(node, maxN, minN):
+            if node.val < minN:
+                self.maxD = max(self.maxD,(maxN - node.val))
+                minN = node.val
+            elif node.val > maxN:
+                self.maxD = max(self.maxD,(node.val - minN))
+                maxN = node.val
+            if node.left:
+                dfs(node.left,maxN,minN)
+            if node.right:
+                dfs(node.right,maxN,minN)
+        dfs(root,root.val,root.val)
+        return self.maxD
 
