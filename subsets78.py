@@ -31,8 +31,8 @@ class Solution2:
         def backtracking(currentL, index):
             self.resultL.append(currentL)
             for i in range(index,lenN):
-                newL = currentL+ [nums[i]]
-                backtracking(newL, index+1)
+                newL = currentL+ [nums[i]] #don't write the wrong variable... 5 freaking hours of debug time. learn your lesson pls...
+                backtracking(newL, i+1)
         backtracking([],0)
         return self.resultL
 Solution2().subsets([1,2,3])
