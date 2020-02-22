@@ -1,12 +1,20 @@
 class Solution1:
     def subsetsWithDup(self, nums):
-        self.result =[[]]
-        for num in nums:
-            tempList = []
-            for listI in self.result:
-                newList = listI.copy()
-                newList.append(num)
-                tempList.append(newList)
-            self.result += tempList
-        return self.result
+        lenN = len(nums)
+        
+        if lenN == 0:
+            return [[]]
+        nums.sort()
+        self.resultL = []
+        def backtracking(first, currentL):
+            self.resultL.append(currentL.copy())
+            last = None
+            for i in range(first, lenN):
+                if nums[i] == last:
+                    continue
+                newL = currentL + [nums[i]]
+                backtracking(i+1, newL)
+                last = nums[i]
+        backtracking(0,[])
+        return self.resultL
 
