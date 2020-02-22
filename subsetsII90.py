@@ -1,12 +1,12 @@
 class Solution1:
     def subsetsWithDup(self, nums):
-        lenN = len(nums)
-        if lenN == 0:
-            return []
-        nums.sorted()
-        self.result = [[]]
-        last = nums[0]
-        for i in range(0, lenN, 1):
-            
+        self.result =[[]]
+        for num in nums:
+            tempList = []
+            for listI in self.result:
+                newList = listI.copy()
+                newList.append(num)
+                tempList.append(newList)
+            self.result += tempList
         return self.result
 
