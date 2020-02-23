@@ -1,5 +1,7 @@
 class Solution:
     def expand(self, S):
+        #first part, clean up S
+        #second part backtrack dealing with permutation.
         flag = False
         listOfItem = []
         for cha in S:
