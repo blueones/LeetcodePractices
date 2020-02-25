@@ -27,39 +27,45 @@ class Solution:
                 temp += s[i]
                 i+=1
         return temp
-Solution().decodeString("100[leetcode]")
-class Solution:
+
+class Solution1:
     def decodeString(self,s):
         #recursion
         #same idea as solution but using recursion.
+        self.dict={}
         lenS = len(s)
-        i = 0
-        temp = ""
-        while i < lenS:
-            if s[i] =="]":
-                temp = temp + numb*stringI
-                return temp
-                i+=1
-            if s[i].isdecimal():
-                numb = 0
-                stackListStr.append(temp)
-                while s[i].isdecimal():
-                    numb = numb*10+int(s[i])
-                    i += 1
-            elif s[i] == "[":
-                newS = s[i+1:]
-                closeNewS = newS.find("]")
-                newSS = newS[:closeNewS+1]
-                stringI = self.decodeString(newSS)
-                i += closeNewS
-
-            elif s[i] =="]":
-                temp = temp + numb*stringI
-                return temp
-                i+=1
-                
-            else:
-                temp += s[i]
-                i+=1
-        return temp
+        def decode(s,begin, end):
+            index = begin
+            temp = ""
+            numberR = ""
+            inside = ""
+            while index in range(begin, end):
+                if s[index].isdecimal():
+                    while s[index].isdecimal():
+                        numberR += s[index]
+                        index += 1
+                    inside = decode(s,index+1,self.dict[index])
+                    index = self.dict[index]-1
+                elif s[index] == "]":
+                    if numberR!="":
+                        temp += int(numberR)*inside
+                    else:
+                        temp += inside
+                    numberR = ""
+                elif s[index].isalpha():
+                    temp+=s[index]
+                index+=1
+            return temp
+                   
+        def parseString(s):
+            stackL = []
+            for i in range(lenS):
+                if s[i] == "[":
+                    stackL.append(i)
+                elif s[i]=="]":
+                    poppedP = stackL.pop(-1)
+                    self.dict[poppedP]= i
+        parseString(s)
+        return decode(s,0,lenS)
+print(Solution1().decodeString("3[a2[c]]"))       
 
