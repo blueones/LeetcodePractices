@@ -46,10 +46,32 @@ class Solution1:
                 
                 
         return self.resultL
-print(Solution1().threeSum([-1,0,1,2,-1,-4]))              
+          
 
 class Solution2:
     def threesum(self,nums):
         #two pointer
-        pass
-
+        nums.sort()
+        lenN = len(nums)
+        self.resultL = list()
+        for i in range(lenN):
+            if i != 0 and nums[i]==nums[i-1]:
+                continue
+            target = 0- nums[i]
+            left = i+1
+            right = lenN -1
+            while left<right:
+                if nums[left]+nums[right]>target:
+                    right -= 1
+                elif nums[left]+nums[right]<target:
+                    left +=1
+                else:
+                    self.resultL.append([nums[i], nums[left],nums[right]])
+                    while left<right and nums[left+1]== nums[left]:
+                        left +=1
+                    left += 1
+                    while left<right and nums[right-1]== nums[right]:
+                        right -=1
+                    right -= 1
+        return self.resultL
+print(Solution2().threesum([-1,0,1,2,-1,-4]))    
