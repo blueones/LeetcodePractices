@@ -75,3 +75,22 @@ class Solution2:
                     right -= 1
         return self.resultL
 print(Solution2().threesum([-1,0,1,2,-1,-4]))    
+class Solution3:
+    #CC solution
+    def threesum(self,nums):
+        nums.sort()
+        res= []
+        n = len(nums)
+        f_st = set()
+        for i in range(n):
+            if nums[i] not in f_st:
+                f_st.add(nums[i])
+                target = -nums[i]
+                s_st = set()
+                t_st = set()
+                for j in range(i+1,n):
+                    if (target-num[j]) in s_st and nums[j] not in t_st:
+                        res.append([nums[i],target-nums[j],nums[j]])
+                        t_st.add(nums[j])
+                    s_st.add(nums[j])
+        return res
