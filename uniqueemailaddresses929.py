@@ -12,6 +12,21 @@ class Solution:
             dictofemails.add(final)
         
         return len(dictofemails)
-
+class Solution1:
+    def numUniqueEmails(self, emails: List[str]) -> int:
+        emailList = dict()
+        for email in emails:
+            seperateLocalDomain= email.split('@')
+            local = seperateLocalDomain[0]
+            domain = seperateLocalDomain[1]
+            local = local.replace(".","").split("+")[0]
+            finalemail = local+"@"+domain
+            # print(emailList, finalemail)
+            if finalemail not in emailList:
+                
+                emailList[finalemail]=1
+            else:
+                emailList[finalemail]+=1
+        return len(emailList)
 
             
