@@ -51,3 +51,17 @@ class Solution2(object):
             if '.' in s:
                 ans = max(ans, curr_len-1)
         return ans
+class Solution3:
+    def lengthLongestPath(self, input: str) -> int:
+        #more intuitive solution
+        maxLen = 0
+        lenDict = {-1:0}
+        listOfLines= input.split("\n")
+        for line in listOfLines:
+            
+            level = line.count("\t")
+            if "." not in line:
+                lenDict[level]= lenDict[level-1]+len(line)-level+1 #here we update/(overwrite) lenDict[level]
+            elif "." in line:
+                maxLen = max(maxLen, lenDict[level-1]+ len(line)-level)
+        return maxLen
