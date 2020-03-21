@@ -9,8 +9,6 @@ class Solution:
     def generateTrees(self, n: int) -> List[TreeNode]:
         def createTrees(start,end):
             resultL =[]
-            if start==end:
-                return [TreeNode(start)]
             if start > end:
                 return [None]
             for i in range(start, end+1):
@@ -19,8 +17,12 @@ class Solution:
                 for rootL in rootILeftList:
                     for rootR in rootIRightList:
                         newRoot = TreeNode(i)
-                        newRoot.left = rootL if rootL == None else TreeNode(rootL.val)
-                        newRoot.right = rootR if rootR == None else TreeNode(rootR.val)
+                        # newRoot.left = rootL if rootL == None else TreeNode(rootL.val)
+                        # newRoot.right = rootR if rootR == None else TreeNode(rootR.val)
+                        newRoot.left = rootL 
+                        newRoot.right = rootR
                         resultL.append(newRoot)
             return resultL
+        if n == 0:
+            return []
         return createTrees(1, n)
