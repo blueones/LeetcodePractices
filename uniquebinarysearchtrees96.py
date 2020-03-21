@@ -66,24 +66,10 @@ class Solution1:
 class Solution2:
     def numTrees(self, n: int) -> int:
         # change Solution1 to DP solution.
-        NumberN = [1,1]
+        NumberN = [0]*(n+1)
+        NumberN[0],NumberN[1] = 1,1
         for i in range(2, n+1):
-            for j in (0,i+1):
-                NumberN[i] = NumberN[j]*NumberN[i-j-1]
-        return NumberN[n]
-            numberT = 0
-            for node in range(1,n+1):
-                leftS = node -1
-                rightS = n - node
-                leftSN = self.numTrees(leftS)
-                rightSN = self.numTrees(rightS)
-                if leftSN!= 0 and rightSN!= 0:
-                    numberT+= leftSN*rightSN
-                elif leftSN== 0 and rightSN== 0:
-                    numberT+=1
-                else:
-                    numberT+= leftSN+rightSN
-            return numberT
-        else:
-            return 0
+            for j in range(1,i+1):
+                NumberN[i] += NumberN[j-1]*NumberN[i-j]
+        
 
