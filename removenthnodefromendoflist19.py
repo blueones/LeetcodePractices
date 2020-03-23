@@ -73,6 +73,52 @@ class Solution2:
             node= node.next
         node.next = node.next.next
         return dummy.next
+class Solution3:
+    # same intuition as solution2, but with two pointers doing one scan. 
+    # have fast pointer start from n+1, and slow pointer start from 0. then have them both start going one node at a time. 
+    # eventually, fast pointer goes to the end which is a None node, 
+    # and slow pointer is at n+1 from this None node. which is a node before our takeout node.
+    def removeNthFromEnd(self,head,n):
+        dummy = TreeNode(0)
+        dummy.next = head
+        faster = dummy
+        slower = dummy
+        fastM = 0
+        slowM = 0
+        while fastM<n+1:
+            faster = faster.next
+            fastM += 1
+        while faster != None:
+            faster = faster.next
+            slower = slower.next
+            fastM += 1
+            slowM += 1
+        slower.next = slower.next.next
+        return dummy.next
+class Solution4:
+    # clean up solution3.
+    def removeNthFromEnd(self,head,n):
+        dummy = TreeNode(0)
+        dummy.next = head
+        faster = dummy
+        slower = dummy
+        fastM = 0
+        # slowM = 0
+        # while fastM<n+1:
+        #     faster = faster.next
+        #     fastM += 1
+        for i in range(n+1):
+            faster= faster.next
+        while faster != None:
+            faster = faster.next
+            slower = slower.next
+            # fastM += 1
+            # slowM += 1
+        slower.next = slower.next.next
+        return dummy.next
+
+
+
             
 
           
