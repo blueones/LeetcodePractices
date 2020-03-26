@@ -21,7 +21,7 @@ class Solution1:
                     return mid
                 return binarySearch(mid+1,right, target)
         return binarySearch(0,x,x)
-class Solution1:
+class Solution2:
     def mySqrt(x):
         left, right = 1, x
         while left<= right:
