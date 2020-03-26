@@ -15,17 +15,19 @@ class Solution1:
     def judgeSquareSum(self,c):
         #binary search
         def binarySearch(left,right,square):
+            if left> right:
+                return False
             mid = left+(right-left)//2
             if mid**2 == square:
                 return True
             elif mid**2> square:
-                binarySearch(left, mid-1, square)
+                return binarySearch(left, mid-1, square)
             elif mid**2< square:
-                binarySearch(mid+1,right,square)
+                return binarySearch(mid+1,right,square)
         right = math.floor(math.sqrt(c))
         for i in range(right+1):
             resi = c - i**2
-            if binarySearch(0,resi//2,resi):
+            if binarySearch(0,resi,resi):
                 return True
             #check if resi is square of something
         return False
