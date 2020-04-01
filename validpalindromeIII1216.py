@@ -85,5 +85,39 @@ class Solution3:
                         dict_palindrome[left][right]=min(dict_palindrome[left+1][right],dict_palindrome[left][right-1])+1
         return dict_palindrome[0][lenS-1]<=k
 
+#extension of this question
+#to return the final string.
 
+class Solution4:
+    def longestPalindrome(self, s: str) -> str:
+        lenS = len(s)
+        dict_palindrome = [[[0,""]for j in range(lenS)] for i in range(lenS)]
+        palindrome_length = (0,"")
+        for i in range(lenS):
+            length = 1
+            stringC = s[i]
+            dict_palindrome[i][i]=(length,stringC)
+            if length>palindrome_length[0]:
+                    palindrome_length=(length,stringC)
+        for m in range(1,lenS):
+            for left in range(lenS-m):
+                right = left+m
+                if m==1:
+                    if s[left]==s[right]:
+                        length =2
+                        stringC = s[left:right+1]
+                    else:
+                        deduct=1
+                        stringC = s[left]
+                    
+                if s[left]==s[right]:
+                    length=dict_palindrome[left+1][right-1][0]+2
+                    stringC = s[left]+dict_palindrome[left+1][right-1][1]+s[right]
+                else:
+                    length = dict_palindrome[left+1][right-1][0]
+                    stringC = dict_palindrome[left+1][right-1][1]
 
+                dict_palindrome[left][right]=[length,stringC]
+                if length>palindrome_length[0]:
+                    palindrome_length=(length,stringC)
+        return palindrome_length[1]
