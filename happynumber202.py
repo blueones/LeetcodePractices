@@ -52,3 +52,19 @@ class Solution2:
         return True
 
 print(Solution2().isHappy(10))
+class Solution2:
+    #leetcode challenge April 2nd
+    def isHappy(self,n):
+        visited_num = {n,}
+        while n!= 1:
+            digits = 0
+            while n > 0:
+                digits += (n%10)**2
+                n = n//10
+            if digits in visited_num:
+                return False
+            visited_num.add(digits)
+            n = digits
+        return True
+        
+        
