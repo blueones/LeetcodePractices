@@ -33,4 +33,23 @@ class Solution:
         for i in range(4):
             final+=str(time[i])
         return final[:2]+":"+final[2:]
-                
+class Solution1:
+    def largestTimeFromDigits(self,A):
+        permutation = []
+        def helper(focus):
+            if focus == 4:
+                permutation.append(A[:])
+            else:
+                for i in range(focus, 4, 1):
+                    A[focus],A[i]= A[i], A[focus]
+                    helper(focus+1)
+                    A[focus],A[i]= A[i], A[focus]
+        helper(0)
+        answer = 0
+        for array in permutation:
+            if array[0]*10+array[1]<24 and array[2]*10+array[3]<60:
+                current_time = (array[0]*10+array[1])*100+array[2]*10+array[3]
+                answer = max(answer,current_time)
+        return "{:02}:{:02}".format(*divmod(answer,100)) if answer>=0 else "" #mark this string formatting. 
+        
+
