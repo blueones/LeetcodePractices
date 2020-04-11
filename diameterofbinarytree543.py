@@ -51,3 +51,22 @@ SunnyNode.left = TreeNode(2)
 SunnyNode.right = TreeNode(3)
 SunnyNode.left.left = TreeNode(4)
 SunnyNode.left.right = TreeNode(5)
+class Solution3:
+    def diameterOfBinaryTree(self, root: TreeNode) -> int:
+        #input a node
+        #output the longest armlength of this node. pass the longer arm length to its papa
+        self.longest_arm = 0
+        def helper_dfs(node):
+            if not node:
+                return 0,0
+            leftarm = rightarm = 0
+            if node.left:
+                leftarm = helper_dfs(node.left)[0]
+            if node.right:
+                rightarm = helper_dfs(node.right)[0]
+            longer_arm = max(leftarm,rightarm)
+            self.longest_arm = max(self.longest_arm,leftarm+rightarm+1)
+            return longer_arm+1,leftarm+rightarm+1
+        helper_dfs(root)
+        return self.longest_arm-1 if self.longest_arm>0 else self.longest_arm
+             
