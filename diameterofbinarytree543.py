@@ -55,6 +55,9 @@ class Solution3:
     def diameterOfBinaryTree(self, root: TreeNode) -> int:
         #input a node
         #output the longest armlength of this node. pass the longer arm length to its papa
+        # first time forgot that I have to record the longest_length of each node since it might not pass root.
+        #so returned leftarm+rightarm+1
+        #it's not necessary.
         self.longest_arm = 0
         def helper_dfs(node):
             if not node:
