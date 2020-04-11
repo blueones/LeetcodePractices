@@ -19,3 +19,17 @@ class Solution:
                     dfs(node.right)
         dfs(root)
         return self.left if abs(target - self.left) < abs(target - self.right) else self.right
+class Solution1:
+    def closestValue(self, root: TreeNode, target: float) -> int:
+        self.left = float("-inf")
+        self.right = float("inf")
+        def dfs(node):
+            if node != None:
+                if node.val >= target:
+                    self.right = min(node.val, self.right)
+                    dfs(node.left)
+                elif node.val < target:
+                    self.left = max(node.val, self.left)
+                    dfs(node.right)
+        dfs(root)
+        return self.left if abs(target - self.left) < abs(target - self.right) else self.right
