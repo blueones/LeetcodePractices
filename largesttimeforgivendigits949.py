@@ -35,6 +35,7 @@ class Solution:
         return final[:2]+":"+final[2:]
 class Solution1:
     def largestTimeFromDigits(self,A):
+        #wrong. line 53 to 58 doesn't provide a descending order of results unfortunately. 
         A.sort(reverse=True)
         times = set()
         def checkValid(string_input):
