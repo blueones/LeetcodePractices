@@ -35,21 +35,26 @@ class Solution:
         return final[:2]+":"+final[2:]
 class Solution1:
     def largestTimeFromDigits(self,A):
-        permutation = []
-        def helper(focus):
+        A.sort(reverse=True)
+        times = set()
+        def checkValid(string_input):
+            hour_input = int(string_input[:2])
+            min_input = int(string_input[3:])
+            if hour_input<24 and min_input<60:
+                return True
+            return False
+        def helper(focus,current_tstring):
             if focus == 4:
-                permutation.append(A[:])
-            else:
-                for i in range(focus, 4, 1):
-                    A[focus],A[i]= A[i], A[focus]
-                    helper(focus+1)
-                    A[focus],A[i]= A[i], A[focus]
-        helper(0)
-        answer = 0
-        for array in permutation:
-            if array[0]*10+array[1]<24 and array[2]*10+array[3]<60:
-                current_time = (array[0]*10+array[1])*100+array[2]*10+array[3]
-                answer = max(answer,current_time)
-        return "{:02}:{:02}".format(*divmod(answer,100)) if answer>=0 else "" #mark this string formatting. 
-        
+                if checkValid(current_tstring):
+                    times.append(current_tstring)
+            if focus ==2:
+                current_tstring+=":"
+            for i in range(focus, len(A),1):
+                A[i],A[focus]=A[focus],A[i]
+                current_tstring+=str(A[focus])
+                helper(focus+1,current_tstring)
+                current_tstring= current_tstring[:-1]
+                A[i],A[focus]=A[focus],A[i]
+        helper(0,"")
 
+        return helper(0,"")[0]

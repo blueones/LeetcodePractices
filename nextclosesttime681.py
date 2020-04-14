@@ -38,4 +38,10 @@ class Solution:
 class Solution1:
     def nextClosestTime(self,time):
         #after reviewing LC solutions.
-        
+        curr_digits = int(time[:2])*60 + int(time[3:])
+        allowed_digits = {int(x) for x in time if x !=":"}
+        while True:
+            curr_digits = (curr_digits+1)%(24*60)#so it's counting in when time goes over 00:00
+            if all([digit in allowed_digits for block in divmod(curr_digits,60) for digit in divmod(block, 10)]):
+                return "{:02}:{:02}".format(*divmod(curr_digits,60))
+
