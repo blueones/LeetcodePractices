@@ -54,5 +54,15 @@ class Solution2:
         rightList[-1] = leftList[-1]
         return rightList
 
-
-print(Solution2().productExceptSelf([1,2,3,4]))
+class Solution:
+    def productExceptSelf(self, nums: List[int]) -> List[int]:
+        #LC challenge 15 solution
+        ans = [1 for num in nums]
+        for index in range(1,len(nums),1):
+            ans[index] = ans[index-1]*nums[index-1]
+        right = 1
+        for index in range(len(nums)-2, -1, -1):
+            right = right*nums[index+1]
+            ans[index] = ans[index]*right
+        
+        return ans
