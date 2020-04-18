@@ -59,3 +59,29 @@ class Solution1:
         helper(0,"")
 
         return helper(0,"")[0]
+class Solution2:
+    def largestTimeFromDigits(self,A):
+        A.sort(reverse=True)
+        times = set()
+        visited = []
+        def checkValid(string_input):
+            hour_input = int(string_input[:2])
+            min_input = int(string_input[3:])
+            if hour_input<24 and min_input<60:
+                return True
+            return False
+        def helper(focus,current_tstring,visited):
+            if focus == 4:
+                if checkValid(current_tstring):
+                    times.append(current_tstring)
+            if focus ==2:
+                current_tstring+=":"
+            for i in range(focus, len(A),1):
+                A[i],A[focus]=A[focus],A[i]
+                current_tstring+=str(A[focus])
+                helper(focus+1,current_tstring)
+                current_tstring= current_tstring[:-1]
+                A[i],A[focus]=A[focus],A[i]
+        helper(0,"")
+
+        return helper(0,"")[0]
