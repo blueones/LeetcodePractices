@@ -15,34 +15,24 @@ class Solution:
 
 
 class Solution1:
-    def checkValidString(self, s: str) -> bool:
-        stack_check = []
-        len_s = len(s)
-        self.ans = True
-        def helper(string_check, index, stack):
-            if index == len_s:
-                self.ans = True
+    def checkValidString(self, s) :
+        #TLE solution. 
+        def helper(string_check, index, count):
+            if index == len(string_check) and count == 0:
+                return True
             else:
-                
-                if string_check[index] == "(":
-                    stack.append("(")
-                    helper(string_check,index+1, stack)
+                for i in range(index,len(string_check)):
+                    if string_check[i] == "(":
+                        count += 1
 
-                elif string_check[index] == "*":
-                    stack.append("(")
-                    helper(string_check, index+1, stack)
-                    stack.pop(-1)
-                    if stack:
-                        stack.pop(-1)
-                        helper(string_check,index+1,stack)
-                else:
-                    if stack:
-                        stack.pop(-1)
-
+                    elif string_check[i] == "*":
+                        return helper(string_check,i+1, count+1) or helper(string_check,i+1,count) or helper(string_check,i+1,count-1)
                     else:
-                        return False
+                        if count>0:
+                            count -= 1
+                        else:
+                            return False
+                return count == 0
         
-        helper(s,0,[])
-        if ans_list:
-            return True
-                        
+        return helper(s,0,0)
+Solution1().checkValidString("(())((())()()(*)(*()(())())())()()((()())((()))(*")
