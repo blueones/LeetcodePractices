@@ -19,7 +19,7 @@ class Solution:
         return self.min_sum
 class Solution1:
     def minPathSum(self,grid):
-        #DP
+        #DP, takes extra space dp as we are storing sums. 
         if grid == []:
             return 0
         row = len(grid)
@@ -34,3 +34,20 @@ class Solution1:
                     dp[i][j]= min(dp[i][j],dp[i][j-1]+grid[i][j])
         return dp[row-1][column-1]
 Solution1().minPathSum([[1,3,1],[1,5,1],[4,2,1]])
+class Solution2:
+    def minPathSum(self,grid):
+        #DP, takes no extra space. 
+        if grid == []:
+            return 0
+        row = len(grid)
+        column = len(grid[0])
+        for i in range(row):
+            for j in range(column):
+                if i-1>=0 and j-1>= 0:
+                    grid[i][j]= grid[i][j]+ min(grid[i][j-1],grid[i-1][j])
+                elif i-1>=0:
+                    grid[i][j]= grid[i][j]+ grid[i-1][j]
+                elif j-1>=0:
+                    grid[i][j]= grid[i][j]+ grid[i][j-1]
+
+        return grid[row-1][column-1]
