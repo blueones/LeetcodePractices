@@ -65,3 +65,20 @@ class Solution2:
             elif stackList == []:
                 stackList.append(currentNode)
         return root
+
+class Solution3:
+    def bstFromPreorder(self,preorder):
+        def bstBuilder(start, end):
+            if start>end:
+                return None
+            node = TreeNode(preorder[start])
+            n = start+1
+            while n<= end and preorder[n] < preorder[start]:
+                n+=1
+            left = bstBuilder(start+1, n - 1)
+            right = bstBuilder(n, end)
+            node.left = left
+            node.right = right
+            return node
+        len_list = len(preorder)
+        return bstBuilder(0,len_list-1)
