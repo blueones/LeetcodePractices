@@ -16,4 +16,5 @@ class Solution:
         return max_len
 class Solution1:
     def longestValidParentheses(self,s):
+        #DP, REALLY HARD DP
         
