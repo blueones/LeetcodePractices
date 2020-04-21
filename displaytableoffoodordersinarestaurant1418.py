@@ -1,5 +1,5 @@
 class Solution:
-    def displayTable(self, orders: List[List[str]]) -> List[List[str]]:
+    def displayTable(self, orders) :
         #definitely needs improvement.
         tables = {}
         food = {}
@@ -32,14 +32,16 @@ class Solution:
                 display_table[tables[order[1]]][food[order[2]]]=str(int(display_table[tables[order[1]]][food[order[2]]])+1)
         return display_table
 
-class Solution:
-    def displayTable(self, orders: List[List[str]]) -> List[List[str]]:
+class Solution1:
+    def displayTable(self, orders):
         #definitely needs improvement.
-        tables = set()
-        food = set()
-        for name, table,food_item in orders:
-            tables.add(table)
-            food.add(food_item)
+        tables = {}
+        food = {}
+        for order in orders:
+            if order[1] not in tables:
+                tables[order[1]] = None
+            if order[2] not in food:
+                food[order[2]] = None
         food_kinds = len(food)
         tables_num = len(tables)
         display_table = [["0" for i in range(food_kinds+1)] for j in range(tables_num+1)]
@@ -63,4 +65,6 @@ class Solution:
             else: 
                 display_table[tables[order[1]]][food[order[2]]]=str(int(display_table[tables[order[1]]][food[order[2]]])+1)
         return display_table
+
+print(Solution1().displayTable([["David","3","Ceviche"],["Corina","10","Beef Burrito"],["David","3","Fried Chicken"],["Carla","5","Water"],["Carla","5","Ceviche"],["Rous","3","Ceviche"]]))
                 
