@@ -25,3 +25,6 @@ class Solution:
                     return 1
                 return -1
         return helper(croakOfFrogs)
+class Solution1:
+    def minNumberOfFrogs(self,croakOfFrogs):
+        
