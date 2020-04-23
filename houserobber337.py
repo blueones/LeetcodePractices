@@ -19,3 +19,15 @@ class Solution:
             rootMax=root.val+rootleftlessMax+rootrightlessMax
             rootlessMax=max(rootleftMax,rootleftlessMax)+max(rootrightMax,rootrightlessMax)
         return [rootMax,rootlessMax]
+class Solution1:
+    def rob(self, root: TreeNode) -> int:
+        def helper(node):
+            if node == None:
+                return 0,0
+            leftRob, leftNoRob = helper(node.left)
+            rightRob, rightNoRob = helper(node.right)
+            nodeRob = node.val+leftNoRob+rightNoRob
+            nodeNoneRob = max(leftRob,leftNoRob)+max(rightRob,rightNoRob)
+            return nodeRob, nodeNoneRob
+        rootRob, rootNoneRob = helper(root)
+        return max(rootRob, rootNoneRob)
