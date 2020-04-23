@@ -14,3 +14,6 @@ class Solution:
             return res if res!="" else "0"
         
         return toString(toInteger(num1)+toInteger(num2))
+class Solution1:
+    def addStrings(self,num1,num2):
+        
