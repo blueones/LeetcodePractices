@@ -13,3 +13,8 @@ class Solution1:
             n = n >> 1
             shift+=1
         return m << shift
+class Solution2:
+    def rangeBitwiseAnd(self,m,n):
+        while m < n:
+            n = n & (n-1)
+        return m&n
