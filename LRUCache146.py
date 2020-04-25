@@ -61,9 +61,9 @@ class LRUCache1:
 
 
     def get(self, key: int) -> int:
-        if key in dict_nodes:
+        if key in self.dict_nodes:
             #remove from linkedlist and add to head
-            current_node = dict_nodes[key]
+            current_node = self.dict_nodes[key]
             current_node.before.next = current_node.next
             current_node.next.before = current_node.before
             current_node.before = self.start
@@ -90,7 +90,7 @@ class LRUCache1:
                 deleted_node = self.end.before
                 deleted_node.before.next = self.end
                 self.end.before = deleted_node.before
-                self.dict_nodes.remove(deleted_node.key)
+                self.dict_nodes.pop(deleted_node.key)
                 self.size -= 1
                 self.put(key, value)
                 
