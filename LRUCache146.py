@@ -48,3 +48,71 @@ obj.put(2,3)
 obj.put(4,1)
 obj.get(1)
 obj.get(2)
+class LRUCache1:
+
+    def __init__(self, capacity: int):
+        self.start = Node(0,0)
+        self.end = Node(0,0)
+        self.start.next = self.end
+        self.end.before = self.start
+        self.dict_nodes = {}
+        self.size = 0
+        self.capacity = capacity
+
+
+    def get(self, key: int) -> int:
+        if key in dict_nodes:
+            #remove from linkedlist and add to head
+            current_node = dict_nodes[key]
+            current_node.before.next = current_node.next
+            current_node.next.before = current_node.before
+            current_node.before = self.start
+            self.start.next.before = current_node
+            current_node.next = self.start.next
+            self.start.next = current_node
+            return current_node.value
+        else:
+            return -1
+
+    def put(self, key: int, value: int) -> None:
+        if key in self.dict_nodes:
+            self.dict_nodes[key].value = value
+            current_node = self.dict_nodes[key]
+            current_node.before.next = current_node.next
+            current_node.next.before = current_node.before
+            current_node.before = self.start
+            self.start.next.before = current_node
+            current_node.next = self.start.next
+            self.start.next = current_node
+        else:
+            
+            if self.size == self.capacity:
+                deleted_node = self.end.before
+                deleted_node.before.next = self.end
+                self.end.before = deleted_node.before
+                self.dict_nodes.remove(deleted_node.key)
+                self.size -= 1
+                self.put(key, value)
+                
+            else:
+                new_node = Node(key,value)
+                self.dict_nodes[key] = new_node
+                self.start.next.before = new_node
+                new_node.next = self.start.next
+                new_node.before = self.start
+                self.start.next = new_node
+                self.size += 1
+
+
+        
+class Node:
+    def __init__(self, key, value):
+        self.key = key
+        self.value = value
+        self.before = None
+        self.next = None
+
+# Your LRUCache object will be instantiated and called as such:
+# obj = LRUCache(capacity)
+# param_1 = obj.get(key)
+# obj.put(key,value)
