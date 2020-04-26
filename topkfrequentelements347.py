@@ -12,3 +12,6 @@ class Solution:
         for i in range(k):
             res.append(sorted_frequency[i][1])
         return res
+class Solution1:
+    def topKFrequent(self, nums, k):
+        
