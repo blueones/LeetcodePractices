@@ -62,7 +62,7 @@ class Solution1:
             return -1
         else:
             return i
-
+import bisect
 class Solution2:
     #improved solution1 
     def shortestWay(self,source, target):
@@ -75,8 +75,9 @@ class Solution2:
             if cha in source_index:
                 #find first in source_index[cha] that's larger than i
                 #update i 
-                new_index = self.find(i,source_index[cha])
-                if new_index != -1:
+                index_list_for_cha = source_index[cha]
+                new_index = bisect.bisect(index_list_for_cha,i)
+                if new_index != len(index_list_for_cha):
                     i = source_index[cha][new_index]
                 else:
                     times+=1
@@ -84,21 +85,6 @@ class Solution2:
             else:
                 return -1
         return times
-    def find(self, left, list_match):
-        len_list = len(list_match)
-        i = 0
-        while i < len_list:
-            if list_match[i] <= left:
-                i+=1
-            else:
-                break
-        if i == len_list:
-            return -1
-        else:
-            return i
-
-
-
         
 
 Solution1().shortestWay("abc","abcbc")
