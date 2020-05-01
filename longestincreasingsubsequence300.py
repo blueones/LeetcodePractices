@@ -42,12 +42,11 @@ class SolutionBottomUp:
                     
                     
         helper(0,float("-inf"))
-        return dp[0]                   
+        return dp[0]              
 class Solution1:
     def lengthOfLIS(self, nums):
         # exponential time complexity
         len_nums = len(nums)
-
         def helper(index, pre):
             if index == len_nums:
                 return 0
