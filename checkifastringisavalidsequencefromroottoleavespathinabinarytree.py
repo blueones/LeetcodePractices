@@ -43,3 +43,21 @@ class Solution1:
                 return False
                 
         return checkingHelper(root, 0)
+class Solution2:
+    def isValidSequence(self, root: TreeNode, arr: List[int]) -> bool:
+        len_arr = len(arr)
+        def checkingHelper(node, index):
+            if node == None or index == len_arr:
+                return False
+            elif index < len_arr and node.val == arr[index]:
+                if node.left == None and node.right == None:
+                    if index == len_arr-1 :
+                        return True
+                
+                else:
+                    return  checkingHelper(node.left, index+1) or checkingHelper(node.right, index+1)
+                    
+            
+            return False
+                
+        return checkingHelper(root, 0)
