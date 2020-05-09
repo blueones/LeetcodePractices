@@ -125,8 +125,28 @@ class Solution3:
                 leaf = self.dictNodes[leaf]
             self.resultpath.append(path[::-1])
         return self.resultpath
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution4:
+    def pathSum(self, root: TreeNode, sum: int) -> List[List[int]]:
+        self.ans = []
+        def helper(node, carry, path):
+            if node!= None:
+                path.append(node.val)
+                if node.left == None and node.right == None:
+                    if carry+node.val == sum:
+                        self.ans.append(path.copy())
+                else:
 
-
+                        helper(node.left, carry+node.val, path)
+                        helper(node.right, carry+node.val, path)
+                path.pop(-1)
+        helper(root, 0, [])
+        return self.ans
         
             
             
