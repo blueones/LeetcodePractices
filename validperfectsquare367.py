@@ -23,3 +23,18 @@ class Solution1:
                 return True
             tryN += 1
         return False
+class Solution2:
+    def isPerfectSquare(self, num):
+        #May 8th
+        #binary search
+        start = 0
+        end = num
+        while start <= end:
+            mid = (start + end)//2
+            if mid**2 == num:
+                return True
+            elif mid**2 > num:
+                end = mid - 1
+            else:
+                start = mid + 1
+        return False
