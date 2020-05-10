@@ -68,3 +68,35 @@ class DoublelyLinkedList:
         max_node.next.before = self.head
         
         return max_node.key
+class Solution1:
+    #very smart solution. marking max as we push. so we already know what's the current Max. 
+    def __init__(self):
+        """
+        initialize your data structure here.
+        """
+        self.stack = list()
+
+    def push(self, x: int) -> None:
+        self.stack.append((x, max(x, self.stack[-1][1] if self.stack else x)))
+
+    def pop(self) -> int:
+        return self.stack.pop()[0]
+
+    def top(self) -> int:
+        return self.stack[-1][0]
+
+    def peekMax(self) -> int:
+        return self.stack[-1][1]
+
+    def popMax(self) -> int:
+        stack_container = []
+        max_now = self.stack[-1][1]
+        while self.stack[-1][0] != max_now:
+            current = self.stack.pop()[0]
+            stack_container.append(current)
+        self.stack.pop(-1)
+        while stack_container:
+            current = stack_container.pop()
+            self.push(current)
+        return max_now
+
