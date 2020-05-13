@@ -20,6 +20,20 @@ class Solution:
         resultS = str(int(resultS))
 Solution().removeKdigits("112", 1)
 class Solution1:
-    def removeKdigits(self,num,k):
-        
+    def removeKdigits(self, num: str, k: int) -> str:
+        self.ans = ""
+        def helper(num, k):
+            if k == 0:
+                self.ans = num
+            else:
+                start = 0
+                while start+1 < len(num) and num[start] <= num[start+1]:
+                    start += 1
+                helper(num[:start]+num[start+1:], k-1)
+        helper(num, k)
+        start = 0
+        while start < len(self.ans) and self.ans[start] == "0":
+            start += 1
+        result = self.ans[start:]
+        return result if result != "" else "0"
             
