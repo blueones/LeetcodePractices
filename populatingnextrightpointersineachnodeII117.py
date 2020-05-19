@@ -44,3 +44,27 @@ class Solution1:
             if leadNode
             head = leadNode.next
         return root
+
+from collections import deque
+class Solution:
+    def connect(self, root: 'Node') -> 'Node':
+        if root == None:
+            return None
+        queue = deque()
+        queue.append(root)
+        while queue:
+            level_size = len(queue)
+            level_nodes = []
+            while level_size > 0:
+                current_node = queue.popleft()
+                level_nodes.append(current_node)
+                if current_node.left:
+                    queue.append(current_node.left)
+                if current_node.right:
+                    queue.append(current_node.right)
+                level_size -= 1
+            for index in range(len(level_nodes)-1):
+                level_nodes[index].next = level_nodes[index+1]
+        return root
+                
+                

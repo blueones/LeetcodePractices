@@ -103,7 +103,24 @@ class Solution2:
             if match(list1,list2):
                 return True
         return False
-
+class Solution3:
+    #LC Daily Challenge. first attempt. 
+    def checkInclusion(self, s1: str, s2: str) -> bool:
+        array_s1 = [0 for i in range(26)]
+        array_s2 = [0 for i in range(26)]
+        for cha in s1:
+            array_s1[ord(cha)-ord("a")] += 1
+        count = 0
+        for index in range(len(s2)):
+            if count == len(s1):
+                array_s2[ord(s2[index-len(s1)])-ord("a")] -= 1
+                count -= 1
+            array_s2[ord(s2[index])- ord("a")] += 1
+            count += 1
+            if array_s2 == array_s1:
+                return True
+        return False
+            
 
         
 
