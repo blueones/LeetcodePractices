@@ -67,4 +67,19 @@ class Solution:
                 level_nodes[index].next = level_nodes[index+1]
         return root
                 
-                
+class Solution2:
+    def connect(self, root):
+        dict_node = {}
+        def dfs(node, level):
+            if node:
+                if level in dict_node:
+                    right_most = dict_node[level][-1]
+                    right_most.next = node
+                    dict_node[level].append(node)
+                else:
+                    dict_node[level] = [node]
+                dfs(node.left, level+1)
+                dfs(node.right, level+1)
+        dfs(root, 0)
+        return root
+            
