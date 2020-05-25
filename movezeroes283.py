@@ -33,6 +33,23 @@ class Solution2:
             if nums[index]!= 0:
                 nums[index],nums[last_zero_index] = nums[last_zero_index],nums[index]
                 last_zero_index += 1
+class Solution3:
+    def moveZeroes(self, nums: List[int]) -> None:
+        zero = 0
+        while zero < len(nums) and nums[zero]!= 0:
+            zero += 1
+        pivot = zero
+        while pivot < len(nums) and pivot == 0:
+            pivot += 1
+        
+        while pivot < len(nums):
+            if nums[pivot]!= 0:
+                nums[pivot], nums[zero] = nums[zero], nums[pivot]
+                zero += 1
+                pivot += 1
+            else:
+                pivot += 1
+                
 
             
             
