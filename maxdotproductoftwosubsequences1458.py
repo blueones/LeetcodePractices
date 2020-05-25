@@ -21,4 +21,15 @@ class Solution:
         backtracking(0,0)
         return self.max_product
 class Solution1:
-    
+    def maxDotProduct(self, nums1: List[int], nums2: List[int]) -> int:
+        dp = [[float("-inf") for j in range(len(nums2)+1)]for i in range(len(nums1)+1)]
+        # for i in range(len(nums1)):
+        #     dp[i][len(nums2)-1] = nums1[i] * nums2[len(nums2)-1]
+        # for j in range(len(nums2)):
+        #     dp[len(nums1)-1][j] = nums1[len(nums1)-1]* nums2[j]
+        for i in range(len(nums1)-1, -1, -1):
+            for j in range(len(nums2)-1, -1, -1):
+                dp[i][j] = max(dp[i+1][j], dp[i][j+1], dp[i+1][j+1]+ nums1[i]*nums2[j], nums1[i]*nums2[j], dp[i+1][j+1] )
+        return dp[0][0]
+        
+        
