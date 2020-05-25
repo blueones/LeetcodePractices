@@ -30,3 +30,20 @@ class Solution:
           
                  
         return ans[:-1] if ans[-1] == " " else ans
+class Solution:
+    def reverseWords(self, s: str) -> str:
+        stack = []
+        pointer = 0
+        while pointer < len(s):
+            if s[pointer] != " ":
+                start = pointer
+                while pointer < len(s) and s[pointer]!= " ":
+                    pointer += 1
+                stack.append(s[start:pointer])
+            else:
+                pointer += 1
+        result_list = []
+        while stack:
+            result_list.append(stack.pop())
+        return " ".join(result_list)
+                    
