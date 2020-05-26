@@ -37,6 +37,22 @@ class Solution1:
             else:
                 count_dict[count]= i
         return max_con
+class Solution2:
+    def findMaxLength(self, nums: List[int]) -> int:
+        num_sum = [0]
+        for num in nums:
+            if num == 1:
+                num_sum.append(num_sum[-1]+1)
+            elif num == 0:
+                num_sum.append(num_sum[-1]-1)
+        dict_sum = {}
+        for index in range(len(num_sum)):
+            if num_sum[index] in dict_sum:
+                dict_sum[num_sum[index]].append(index)
+            else:
+                dict_sum[num_sum[index]] = [index]
+        length_list = [dict_sum[i][-1]- dict_sum[i][0] for i in dict_sum]
+        return max(length_list)
         
 
         
