@@ -49,3 +49,30 @@ graph_edge = [[0,1],[3,1],[1,3],[3,2]]
 print(Solution().canFinish(4,graph_edge))
 
             
+from collections import defaultdict
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        dict_courses = defaultdict(list)
+        for prerequisite in prerequisites:
+            dict_courses[prerequisite[0]].append(prerequisite[1]) 
+        def dfs(node, path):
+            if path[node] == True:
+                return False
+            else:
+                visited[node] = True
+                path[node] = True
+                for neighbor in dict_courses[node]:
+                    if dfs(neighbor, path) == False:
+                        return False
+                path[node] = False
+                return True
+
+        visited = [False for i in range(numCourses)]
+        path = [False for i in range(numCourses)]
+        
+        for i in range(numCourses):
+            if visited[i] == False:
+                if dfs(i, path) == False:
+                    return False
+                visited[i] = True
+        return True
