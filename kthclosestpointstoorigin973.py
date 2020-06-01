@@ -16,3 +16,6 @@ class Solution1:
         points.sort(key = lambda x:x[0]**2+x[1]**2)
         return points[:K]
         
+class Solution2:
+    def kClosest(self, points, K):
+        #
