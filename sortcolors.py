@@ -54,23 +54,25 @@ class DoublelyLinkedlist:
         if self.head == None:
             return True
         return False
-class Solution:
+
+class Solution1:
     def sortColors(self, nums: List[int]) -> None:
         """
         Do not return anything, modify nums in-place instead.
         """
-        linkedlist = DoublelyLinkedlist()
+        zero = 0
+        two = len(nums)-1
         pointer = 0
-        for num in nums:
-            if num == 2:
-                linkedlist.append(2)
-            elif num == 1:
-                linkedlist.append_left(1)
-            else:
-                nums[pointer] = 0
-                pointer += 1
-        while not linkedlist.is_empty():
+        while pointer <= two:
             
-            current = linkedlist.pop_left()
-            nums[pointer] = current
-            pointer += 1
+                if nums[pointer] == 0:
+                    nums[pointer],nums[zero] = nums[zero], nums[pointer]
+                    zero += 1
+                    pointer += 1
+                elif nums[pointer] == 2:
+                    nums[pointer],nums[two] = nums[two],nums[pointer]
+                    two -= 1
+                else:
+                    pointer += 1
+                    
+            
