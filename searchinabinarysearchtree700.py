@@ -16,3 +16,13 @@ class Solution:
                 return self.searchBST(root.right,val)
             else:
                 return root
+class Solution1:
+    def searchBST(self, root: TreeNode, val: int) -> TreeNode:
+        while root != None:
+            if root.val == val:
+                return root
+            elif root.val > val:
+                root = root.left
+            elif root.val < val:
+                root = root.right
+        return None
