@@ -45,3 +45,15 @@ class Solution1:
             deq.append(index)
             max_list.append(nums[deq[0]])
         return max_list
+class Solution2:
+    def maxSlidingWindow(self, nums, k):
+        #DP
+        dp = [None for i in range(k, len(nums))]
+        #get dp[0]
+        max_k = 0 #max_k is the index of the max number
+        for index in range(k):
+            if nums[index] > nums[max_k]:
+                max_k = index
+        dp[0] = max_k
+        for index in range(k, len(nums)):
+            if 
