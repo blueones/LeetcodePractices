@@ -76,3 +76,31 @@ class Solution:
                     return False
                 visited[i] = True
         return True
+from collections import defaultdict, deque
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        #topological sort
+        indegree = [0 for i in range(numCourses)]
+        verges = 0
+        dict_graph = defaultdict(set)
+        for pre in prerequisites:
+            indegree[pre[0]] += 1
+            dict_graph[pre[1]].add(pre[0])
+            verges += 1
+        
+        stack = deque()
+        for i in range(numCourses):
+            if indegree[i] == 0:
+                stack.append(i)
+        
+        while stack:
+            current_node = stack.pop()
+            for after_course in dict_graph[current_node]:
+                indegree[after_course] -= 1
+                verges -= 1
+                if indegree[after_course] == 0:
+                    stack.append(after_course)
+        if verges != 0:
+            return False
+        return True
+        
