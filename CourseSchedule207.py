@@ -103,4 +103,47 @@ class Solution:
         if verges != 0:
             return False
         return True
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+from collections import deque
+class Solution3:
+    def countNodes(self, root: TreeNode) -> int:
+        #binary search in trees. pretty cool
+        if root == None:
+            return 0
+        levels = self.count_levels(root)
+        #total = 2**levels -1 + last_level_amont
+        #last level amount range from 1 to 2**levels(index ranges from 0 to 2**levels-1)
+        #find the leftest node that's none in the last level
+        left = 1
+        right = 2**levels-1
+        while left <= right:
+            mid = (left+right)//2
+            if self.exist(mid, levels, root):
+                left = mid+1
+            else:
+                right = mid-1
+        return 2**levels-1+ left
+    def count_levels(self, node):
+        levels = 0
         
+        while node.left:
+            node = node.left
+            levels += 1
+        return levels
+    def exist(self, index, levels, node):
+        left = 0
+        right = 2**levels-1
+        for level in range(levels):
+            split = (left+right)//2
+            if index > split:
+                node = node.right
+                left = split+1
+            else:
+                node = node.left
+                right = split
+        return node != None
