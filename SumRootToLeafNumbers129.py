@@ -86,4 +86,22 @@ class Solution2:
 
 
 
-print(Solution2().sumNumbers(root))
+from collections import deque
+class Solution:
+    def sumNumbers(self, root: TreeNode) -> int:
+        root_to_leaf = 0
+        stack = deque()
+        if root == None:
+            return 0
+        stack.append((root, 0))
+        while stack:
+            current_node, current_num = stack.pop()
+            new_sum = current_num*10 + current_node.val
+            if current_node.left == None and current_node.right == None:
+                root_to_leaf += new_sum
+            if current_node.left:
+                stack.append((current_node.left, new_sum))
+            if current_node.right:
+                stack.append((current_node.right, new_sum))
+        return root_to_leaf
+            
