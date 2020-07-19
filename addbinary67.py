@@ -41,3 +41,28 @@ class Solution2:
             carry = (x&y)<<1
             x,y = answer, carry
         return bin(x)[2:]
+class Solution:
+    def addBinary(self, a: str, b: str) -> str:
+        if len(a)> len(b):
+            a,b = b,a
+        #a is shorter, b is longer
+        carry = 0
+        ans = deque()
+        index_a = len(a) - 1
+        index_b = len(b) - 1
+        while carry!= 0 or index_a >= 0 or index_b >= 0:
+            digit_a = digit_b = 0
+            if index_a >= 0:
+                digit_a = int(a[index_a])
+            if index_b >= 0:
+                digit_b = int(b[index_b])
+            digit_add = digit_a+digit_b + carry
+            carry = (digit_add)//2
+            digit_current = str((digit_add)%2)
+            index_a -= 1
+            index_b -= 1
+            
+            ans.appendleft(digit_current)
+        
+        ans_string = ""
+        return "".join(ans)
