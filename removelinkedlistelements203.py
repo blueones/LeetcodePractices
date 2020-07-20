@@ -39,6 +39,43 @@ sunnyNode.next.next.next.next=ListNode(4)
 sunnyNode.next.next.next.next.next=ListNode(5)
 sunnyNode.next.next.next.next.next.next=ListNode(6)
 print(Solution().removeElements(sunnyNode,6))            
-
+class Solution:
+    def removeElements(self, head: ListNode, val: int) -> ListNode:
+        
+        pseudo_head = ListNode(0)
+        pseudo_head.next = head
+        current = head
+        before = pseudo_head
+        while current != None:
+            if current.val == val:
+                before.next = current.next
+                
+                current.next = None
+                current = before.next
+                
+            else:
+            
+                before = before.next
+                current = current.next
+        return pseudo_head.next
+class Solution:
+    def removeElements(self, head: ListNode, val: int) -> ListNode:
+        
+        pseudo_head = ListNode(0)
+        pseudo_head.next = head
+        current = head
+        before = pseudo_head
+        while current != None:
+            if current.val == val:
+                before.next = current.next
+                
+                
+                
+                
+            else:
+            
+                before = before.next
+            current = current.next
+        return pseudo_head.next
                     
         
