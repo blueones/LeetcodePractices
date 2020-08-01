@@ -56,3 +56,31 @@ class Solution:
                     return current
         else:
             return ans_sofar
+class Solution:
+    def calculate(self, s: str) -> int:
+        queue = deque()
+        number = 0
+        sign = "+"
+        for index in range(len(s)):
+            cha = s[index]
+            if cha.isnumeric():
+                number = number*10+(ord(cha)-ord("0"))
+            if cha in {"*","/","+","-"} or index == len(s)-1:
+                if sign == "+":
+                    queue.append(number)
+                elif sign == "-":
+                    queue.append(number*(-1))
+                elif sign == "*":
+                    
+                    queue.append(queue.pop()*number)
+                  
+                elif sign == "/":
+                    if queue[-1] <0 and queue[-1]%number!= 0:
+                        queue.append(queue.pop()//number+1)
+                    else:
+                        queue.append(queue.pop()//number)
+                sign = cha
+                
+                number = 0
+        
+        return sum(queue)
