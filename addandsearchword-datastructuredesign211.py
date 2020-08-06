@@ -70,3 +70,47 @@ class TrieNode:
         self.val = val
         self.chas = defaultdict()
         self.word = False
+#LC solution
+class WordDictionary:
+
+    def __init__(self):
+        """
+        Initialize your data structure here.
+        """
+        self.trie = {}
+        
+
+    def addWord(self, word: str) -> None:
+        """
+        Adds a word into the data structure.
+        """
+        current = self.trie
+        for cha in word:
+            if cha in current:
+                current = current[cha]
+            else:
+                current[cha] = {}
+                current = current[cha]
+        current["#"] = True
+        
+
+    def search(self, word: str) -> bool:
+        """
+        Returns if the word is in the data structure. A word could contain the dot character '.' to represent any one letter.
+        """
+        def search_in_trie(trie, word):
+            current = trie
+            for index,cha in enumerate(word):
+                if cha == ".":
+                    for child in current:
+                        if child != "#" and search_in_trie(current[child],word[index+1:]):
+                            return True
+                    return False
+                else:
+                    if cha in current:
+                        current = current[cha]
+                    else:
+                        return False
+            
+            return "#" in current
+        return search_in_trie(self.trie, word)
