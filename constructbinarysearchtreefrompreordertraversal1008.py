@@ -82,3 +82,32 @@ class Solution3:
             return node
         len_list = len(preorder)
         return bstBuilder(0,len_list-1)
+#recursive solution using binary search 
+class Solution:
+    def bstFromPreorder(self, preorder: List[int]) -> TreeNode:
+        def search(target, start, end):
+            initial_end = end
+            if start > end:
+                return None
+            while start <= end:
+                mid = (start+end)//2
+                if preorder[mid]>target:
+                    end = mid-1
+                else:
+                    start = mid+1
+            if start > initial_end :
+                return None
+            return start
+        def bst(begin, end):
+            if begin> end:
+                return None
+            current = TreeNode(preorder[begin])
+            right_index = search(preorder[begin],begin+1, end)
+            if right_index:
+                current.right = bst(right_index, end)
+                current.left = bst(begin+1, right_index-1)
+            else:
+                if begin+1<= end:
+                    current.left = bst(begin+1, end)
+            return current
+        return bst(0, len(preorder)-1)

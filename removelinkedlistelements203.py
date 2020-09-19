@@ -76,6 +76,6 @@ class Solution:
             
                 before = before.next
             current = current.next
-        return pseudo_head.next
+        return pseudo_head.next0
                     
         
