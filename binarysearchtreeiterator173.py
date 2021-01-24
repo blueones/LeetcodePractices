@@ -75,3 +75,16 @@ class BSTIterator2:
 # obj = BSTIterator(root)
 # param_1 = obj.next()
 # param_2 = obj.hasNext()
+
+    def next(self) -> int:
+        while self.pointer:
+            self.stack.append(self.pointer)
+            self.pointer = self.pointer.left
+        if self.stack:
+            self.pointer = self.stack.pop()
+            ans = self.pointer.val
+            self.pointer = self.pointer.right
+            return ans
+
+    def hasNext(self) -> bool:
+        return self.pointer or self.stack
